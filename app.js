@@ -18,6 +18,10 @@ if (SUPPORTS_MEDIA_DEVICES) {
     if (cameras.length === 0) {
       log('No camera found on this device.');
     }
+	  else
+	  {
+	 log('Camera found success'); 
+	  }
     const camera = cameras[cameras.length - 1];
 
     // Create stream and get video track
@@ -34,7 +38,8 @@ if (SUPPORTS_MEDIA_DEVICES) {
       //Create image capture object and get camera capabilities
       const imageCapture = new ImageCapture(track)
 imageCapture.getPhotoCapabilities().then(capabilities => {
- 
+ 	 log('Photo capabilities found success'); 
+
         //let there be light!
         const btn = document.querySelector('.switch');
         if (capabilities.torch){
@@ -49,6 +54,15 @@ imageCapture.getPhotoCapabilities().then(capabilities => {
           });
         }else{
         	log("No torch found");
+		btn.addEventListener('click', function(){
+          	try{
+          	 	track.applyConstraints({
+           	  	advanced: [{torch: false}]
+          	  });
+          	} catch(err){
+            		log(err);
+          	}
+          });
         }
       });
     }).catch(log);
