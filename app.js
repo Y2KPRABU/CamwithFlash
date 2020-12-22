@@ -97,15 +97,21 @@ function cameraStart() {
         });
 }
 // Take a picture when cameraTrigger is tapped
-cameraStartButton.onclick = function() {
+cameraStartButton.onclick = function() 
+{
+	 log(' camera started on this device.');
 cameraStart();
 }
 
 // Take a picture when cameraTrigger is tapped
 cameraStopButton.onclick = function() {
+	
  track.stop();
+		 log(' camera stopped on this device.');
+
 }
           btnFlash.onclick =  function(){
+		   log('Flash found on this device. starting');
 		 startFlash(); 
 	  }
 
