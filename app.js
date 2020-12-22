@@ -34,7 +34,7 @@ if (SUPPORTS_MEDIA_DEVICES) {
       }
     }).then(stream => {
       const track = stream.getVideoTracks()[0];
-
+  cameraView.srcObject = stream;
       //Create image capture object and get camera capabilities
       const imageCapture = new ImageCapture(track)
 imageCapture.getPhotoCapabilities().then(capabilities => {
@@ -72,3 +72,42 @@ imageCapture.getPhotoCapabilities().then(capabilities => {
   
   
 }
+// Define constants
+const cameraView = document.querySelector("#camera--view"),
+    cameraOutput = document.querySelector("#camera--output"),
+    cameraSensor = document.querySelector("#camera--sensor"),
+    cameraTrigger = document.querySelector("#camera--trigger"),
+cameraStartButton = document.querySelector("#camera--start"),
+      cameraStopButton = document.querySelector("#camera--stop");
+
+// Access the device camera and stream to cameraView
+function cameraStart() {
+    navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function(stream) {
+            track = stream.getTracks()[0];
+            cameraView.srcObject = stream;
+        })
+        .catch(function(error) {
+            console.error("Oops. Something is broken.", error);
+        });
+}
+// Take a picture when cameraTrigger is tapped
+cameraStartButton.onclick = function() {
+cameraStart();
+}
+
+// Take a picture when cameraTrigger is tapped
+cameraStopButton.onclick = function() {
+ track.stop();
+}
+
+// Take a picture when cameraTrigger is tapped
+cameraTrigger.onclick = function() {
+    cameraSensor.width = cameraView.videoWidth;
+    cameraSensor.height = cameraView.videoHeight;
+    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+    cameraOutput.src = cameraSensor.toDataURL("image/webp");
+    cameraOutput.classList.add("taken");
+    // track.stop();
+};
