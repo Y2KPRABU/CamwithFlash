@@ -6,6 +6,9 @@ const cameraView = document.querySelector("#camera--view"),
 cameraStartButton = document.querySelector("#camera--start"),
       cameraStopButton = document.querySelector("#camera--stop");
 
+// Set constraints for the video stream
+var constraints = { video: { facingMode: "user" }, audio: false };
+var track = null;
 
 //have a console on mobile
 const consoleOutput = document.getElementById("camDiv");
@@ -16,7 +19,7 @@ const log = function(msg){
 
 //Test browser support
 const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
-
+function startFlash(){
 if (SUPPORTS_MEDIA_DEVICES) {
   //Get the environment camera (usually the second one)
   navigator.mediaDevices.enumerateDevices().then(devices => {
@@ -79,6 +82,7 @@ imageCapture.getPhotoCapabilities().then(capabilities => {
   //The light will be on as long the track exists
   
   
+}
 }
 // Access the device camera and stream to cameraView
 function cameraStart() {
