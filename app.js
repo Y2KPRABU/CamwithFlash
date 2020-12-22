@@ -1,3 +1,11 @@
+// Define constants
+const cameraView = document.querySelector("#camera--view"),
+    cameraOutput = document.querySelector("#camera--output"),
+    cameraSensor = document.querySelector("#camera--sensor"),
+    cameraTrigger = document.querySelector("#camera--trigger"),
+cameraStartButton = document.querySelector("#camera--start"),
+      cameraStopButton = document.querySelector("#camera--stop");
+
 
 //have a console on mobile
 const consoleOutput = document.getElementById("camDiv");
@@ -72,14 +80,6 @@ imageCapture.getPhotoCapabilities().then(capabilities => {
   
   
 }
-// Define constants
-const cameraView = document.querySelector("#camera--view"),
-    cameraOutput = document.querySelector("#camera--output"),
-    cameraSensor = document.querySelector("#camera--sensor"),
-    cameraTrigger = document.querySelector("#camera--trigger"),
-cameraStartButton = document.querySelector("#camera--start"),
-      cameraStopButton = document.querySelector("#camera--stop");
-
 // Access the device camera and stream to cameraView
 function cameraStart() {
     navigator.mediaDevices
