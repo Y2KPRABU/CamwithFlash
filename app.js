@@ -18,7 +18,10 @@ const log = function(msg){
 	consoleOutput.innerText = `${consoleOutput.innerText}\n${JSON.stringify(msg)}`;
   console.log(msg);
 }
-
+btnFlash.onclick =  function(){
+		   log('Flash found on this device. starting');
+		 startFlash(); 
+	  };
 //Test browser support
 const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
 function startFlash(){
@@ -110,10 +113,7 @@ cameraStopButton.onclick = function() {
 		 log(' camera stopped on this device.');
 
 }
-          btnFlash.onclick =  function(){
-		   log('Flash found on this device. starting');
-		 startFlash(); 
-	  }
+          
 
 // Take a picture when cameraTrigger is tapped
 cameraTrigger.onclick = function() {
