@@ -5,6 +5,8 @@ const cameraView = document.querySelector("#camera--view"),
     cameraTrigger = document.querySelector("#camera--trigger"),
 cameraStartButton = document.querySelector("#camera--start"),
       cameraStopButton = document.querySelector("#camera--stop");
+        //let there be light!
+        const btnFlash = document.querySelector('.switch');
 
 // Set constraints for the video stream
 var constraints = { video: { facingMode: "user" }, audio: false };
@@ -51,10 +53,8 @@ if (SUPPORTS_MEDIA_DEVICES) {
 imageCapture.getPhotoCapabilities().then(capabilities => {
  	 log('Photo capabilities found success'); 
 
-        //let there be light!
-        const btn = document.querySelector('.switch');
         if (capabilities.torch){
-          btn.addEventListener('click', function(){
+          btnFlash.addEventListener('click', function(){
           	try{
           	 	track.applyConstraints({
            	  	advanced: [{torch: true}]
@@ -65,7 +65,7 @@ imageCapture.getPhotoCapabilities().then(capabilities => {
           });
         }else{
         	log("No torch found");
-		btn.addEventListener('click', function(){
+		btnFlash.addEventListener('click', function(){
           	try{
           	 	track.applyConstraints({
            	  	advanced: [{torch: false}]
@@ -105,6 +105,9 @@ cameraStart();
 cameraStopButton.onclick = function() {
  track.stop();
 }
+          btnFlash.onclick =  function(){
+		 startFlash(); 
+	  }
 
 // Take a picture when cameraTrigger is tapped
 cameraTrigger.onclick = function() {
